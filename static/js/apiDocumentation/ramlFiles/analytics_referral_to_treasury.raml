@@ -1,0 +1,654 @@
+#%RAML 0.8
+---
+title: TROR-Analytics Referral to Treasury
+version: v1
+baseUri: https://transparency.treasury.gov:443/services/api
+protocols: [ HTTP ]
+
+/fiscal_service/v1/debt/tror/analytics_referral_to_treasury:
+  description: TROR-Analytics Referral to Treasury
+  get:
+    queryParameters:
+      fields:
+        displayName: Field List
+        type: string
+        description: Field parameter accepts a comma separated list of field names that the user wants to be returned in the response.
+        example: fields=xxx,yyy,zzz
+        required: false
+        default: 
+      filter:
+        displayName: Filter
+        type: string
+        description: Filter is used to apply logic criteria to each field if necessary (lt, gt, lte, gte, eq, in).
+        example: 1) filter=xxx:eq:value,yyy:lt:1,zzz:gt:10  2) filter=reporting_fiscal_year:in:(2007,2008,2009,2010)
+        required: false
+        default: 
+      sort:
+        displayName: Sorting
+        type: string
+        description: Sorting parameter accepts a comma separated list of field names that the user wants to sort the response by.
+        example: sort=xxx,-yyy,zzz
+        required: false
+        default: 
+      pretty_print:
+        displayName: Pretty Print
+        type: string
+        description: Pretty print will put carriage returns and indentation in the json response so that it can be easily read by a human.
+        example: pretty_print=yes
+        required: false
+        default: no
+      format:
+        displayName: Response Format
+        type: string
+        description: Format is used to define how output method for the response (json, xml, csv).
+        example: format=json
+        required: false
+        default: json
+      limit:
+        displayName: Row Limit
+        type: number
+        description: Limit will set the number of rows that are returned in a request.
+        example: limit=100
+        required: false
+        default: 100
+      offset:
+        displayName: Row Offset
+        type: number
+        description: Offset will set the starting point of the pagination.
+        example: offset=0
+        required: false
+        default: 0
+    responses:
+      200:
+        body:
+          application/xml:
+          application/csv:
+          application/json:
+            schema: |
+              {
+                "type": "object",
+                "$schema": "http://json-schema.org/draft-03/schema",
+                "id": "http://jsonschema.net",
+                "properties": {
+                  "reporting_calendar_year": {
+                    "type": "year",
+                    "description": "Calendar Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_fiscal_year": {
+                    "type": "year",
+                    "description": "Fiscal Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_calendar_quarter": {
+                    "type": "string",
+                    "description": "Calendar Quarter Number",
+                    "format": ""
+                  },
+                  "reporting_fiscal_quarter": {
+                    "type": "string",
+                    "description": "Fiscal Quarter Number",
+                    "format": ""
+                  },
+                  "reporting_calendar_month": {
+                    "type": "month",
+                    "description": "Calendar Month Number",
+                    "format": "MM"
+                  },
+                  "reporting_fiscal_month": {
+                    "type": "month",
+                    "description": "Fiscal Month Number",
+                    "format": "MM"
+                  },
+                  "reporting_quarter_end_date": {
+                    "type": "date",
+                    "description": "Reporting Quarter End Date",
+                    "format": "YYYY-MM-DD"
+                  },
+                  "reporting_quarter_end_year": {
+                    "type": "year",
+                    "description": "Reporting Quarter End Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_window_status": {
+                    "type": "string",
+                    "description": "Reporting Window Status",
+                    "format": ""
+                  },
+                  "receivable_type_id": {
+                    "type": "number",
+                    "description": "Receivable Type ID",
+                    "format": "10.2"
+                  },
+                  "receivable_type": {
+                    "type": "number",
+                    "description": "Receivable Type",
+                    "format": "10.2"
+                  },
+                  "receivable_type_description": {
+                    "type": "string",
+                    "description": "Receivable Type Descriptions",
+                    "format": ""
+                  },
+                  "is_receivable_type_active": {
+                    "type": "string",
+                    "description": "Receivable Type Active Indicator",
+                    "format": ""
+                  },
+                  "funding_type_id": {
+                    "type": "number",
+                    "description": "Funding Type ID",
+                    "format": "10.2"
+                  },
+                  "funding_type": {
+                    "type": "number",
+                    "description": "Funding Type",
+                    "format": "10.2"
+                  },
+                  "funding_type_description": {
+                    "type": "string",
+                    "description": "Funding Type Description",
+                    "format": ""
+                  },
+                  "end_balance_amount": {
+                    "type": "number",
+                    "description": "Ending Balance Amount",
+                    "format": "10.2"
+                  },
+                  "end_balance_count": {
+                    "type": "number",
+                    "description": "Ending Balance Count",
+                    "format": "10.2"
+                  },
+                  "debt_by_category_amount": {
+                    "type": "number",
+                    "description": "Delinquent Debt By Category Amount",
+                    "format": "10.2"
+                  },
+                  "delinquency_rate_amount": {
+                    "type": "number",
+                    "description": "Delinquent Rate Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_rate_percent_amount": {
+                    "type": "number",
+                    "description": "Delinquency Rate Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_rate_percent_count": {
+                    "type": "number",
+                    "description": "Delinquency Rate Count",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_top_rate_amt": {
+                    "type": "number",
+                    "description": "Referred Debt TOP Amount Post Data Act",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_top_rate_nbr": {
+                    "type": "number",
+                    "description": "Referred Debt TOP Count Post Data Act",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_cs_rate_amt": {
+                    "type": "number",
+                    "description": "Referred Debt CS Amount Post Data Act",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_cs_rate_nbr": {
+                    "type": "number",
+                    "description": "Referred Debt CS Count Post Data Act",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_deliq_ovr_120_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury Amount",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_top_cnc_dbt_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Treasury CNC Debt Amount",
+                    "format": "10.2"
+                  },
+                  "debt_nef_top_in_bankrcy_amt": {
+                    "type": "number",
+                    "description": "Debt Ineligible to Treasury in Bankruptcy Amount",
+                    "format": "10.2"
+                  },
+                  "debt_nef_top_forb_appea_amt": {
+                    "type": "number",
+                    "description": "Debt Ineligible for Treasury in Forbearance and Formal Appeal Amount",
+                    "format": "10.2"
+                  },
+                  "debt_nef_top_foreclosur_amt": {
+                    "type": "number",
+                    "description": "Debt Ineligible for Treasury in Foreclosure Amount",
+                    "format": "10.2"
+                  },
+                  "debt_nef_top_other_amt": {
+                    "type": "number",
+                    "description": "Debt Ineligible for Treasury in Other Amouunt",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_top_cltn_bal_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury for Collection Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_top_dbt_eli_treas_amt": {
+                    "type": "number",
+                    "description": "Debt Eligigble for Referral to TOP Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_top_dbt_eli_treas_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligigble for Referral to TOP Number",
+                    "format": "10.2"
+                  },
+                  "exptn_top_foreig_sov_dbt_amt": {
+                    "type": "number",
+                    "description": "Exceptions from TOP Foreign/Soveriegn Debt Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_top_foreig_sov_dbt_nbr": {
+                    "type": "number",
+                    "description": "Exceptions from TOP Foreign/Soveriegn Debt Number",
+                    "format": "10.2"
+                  },
+                  "exptn_top_litg_enfo_cltn_amt": {
+                    "type": "number",
+                    "description": "Exceptions from TOP Litigations for Enforced Collection Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_top_litg_enfo_cltn_nbr": {
+                    "type": "number",
+                    "description": "Exceptions from TOP Litigations for Enforced Collection Number",
+                    "format": "10.2"
+                  },
+                  "exptn_top_other_amt": {
+                    "type": "number",
+                    "description": "Exceptions from TOP Other Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_top_other_nbr": {
+                    "type": "number",
+                    "description": "Exceptions from TOP Other Number",
+                    "format": "10.2"
+                  },
+                  "exptn_top_rqr_ref_top_ag_amt": {
+                    "type": "number",
+                    "description": "Debt Required to be Referred to TOP Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_top_rqr_ref_top_ag_nbr": {
+                    "type": "number",
+                    "description": "Debt Required to be Referred to TOP Number",
+                    "format": "10.2"
+                  },
+                  "exptn_top_dbt_ref_to_top_amt": {
+                    "type": "number",
+                    "description": "Debt Referred to TOP Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_top_dbt_ref_to_top_nbr": {
+                    "type": "number",
+                    "description": "Debt Referred to TOP Number",
+                    "format": "10.2"
+                  },
+                  "exptn_top_ref_top_thr_cs_amt": {
+                    "type": "number",
+                    "description": "Debt Referred to TOP through Cross-Servicing Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_top_ref_top_thr_cs_nbr": {
+                    "type": "number",
+                    "description": "Debt Referred to TOP through Cross-Servicing Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_dbt_eli_treas_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to CS Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_dbt_eli_treas_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to CS Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_fs_dbt_amt": {
+                    "type": "number",
+                    "description": "Exceptions from CS Foreign/Soveriegn Debt Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_fs_dbt_nbr": {
+                    "type": "number",
+                    "description": "Exceptions from CS Foreign/Soveriegn Debt Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_litg_enfo_cltn_amt": {
+                    "type": "number",
+                    "description": "Exception from CS in Litigation for Enforced Collection Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_litg_enfo_cltn_nbr": {
+                    "type": "number",
+                    "description": "Exception from CS in Litigation for Enforced Collection Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_prv_cltn_agcy_amt": {
+                    "type": "number",
+                    "description": "Exception from CS at Private Collection Agencies Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_prv_cltn_agcy_nbr": {
+                    "type": "number",
+                    "description": "Exception from CS at Private Collection Agencies Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_intern_offset_amt": {
+                    "type": "number",
+                    "description": "Exceptions from CS in Process of Internal Offset Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_intern_offset_nbr": {
+                    "type": "number",
+                    "description": "Exceptions from CS in Process of Internal Offset Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_exempt_from_cs_amt": {
+                    "type": "number",
+                    "description": "Debt Exempted from CS Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_exempt_from_cs_nbr": {
+                    "type": "number",
+                    "description": "Debt Exempted from CS Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_return_from_cs_amt": {
+                    "type": "number",
+                    "description": "Debts Returned from CS Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_return_from_cs_nbr": {
+                    "type": "number",
+                    "description": "Debts Returned from CS Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_other_amt": {
+                    "type": "number",
+                    "description": "Exceptions from CS other Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_other_nbr": {
+                    "type": "number",
+                    "description": "Exceptions from CS other Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_rqr_ref_tre_cs_amt": {
+                    "type": "number",
+                    "description": "Debt Required to be Referred for CS Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_rqr_ref_tre_cs_nbr": {
+                    "type": "number",
+                    "description": "Debt Required to be Referred for CS Number",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_ref_tre_cs_amt": {
+                    "type": "number",
+                    "description": "Debt Referred for CS Amount",
+                    "format": "10.2"
+                  },
+                  "exptn_cs_ref_tre_cs_nbr": {
+                    "type": "number",
+                    "description": "Debt Referred for CS Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_top_cltn_bal_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury for Collection Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_deliq_ovr_120_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_int_off_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury In the Process of Internal Offset Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_int_off_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury In the Process of Internal Offset Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_exmp_amt": {
+                    "type": "number",
+                    "description": "Debt Exempted by Treasury from Cross-Servicing Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_exmp_nbr": {
+                    "type": "number",
+                    "description": "Debt Exempted by Treasury from Cross-Servicing Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_rt_amt": {
+                    "type": "number",
+                    "description": "Debt Returned from Cross-Servicing Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_rt_nbr": {
+                    "type": "number",
+                    "description": "Debt Returned from Cross-Servicing Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_othr_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury Other Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_othr_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury Other Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_debt_reqd_amt": {
+                    "type": "number",
+                    "description": "Debt Required to be Referred to Treasury for Cross-Servicing Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_debt_reqd_nbr": {
+                    "type": "number",
+                    "description": "Debt Required to be Referred to Treasury for Cross-Servicing Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_refrd_amt": {
+                    "type": "number",
+                    "description": "Debt Referred to Treasury for Cross-Servicing Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_refrd_nbr": {
+                    "type": "number",
+                    "description": "Debt Referred to Treasury for Cross-Servicing Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_ovr_180_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt Over 180 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_ovr_180_days_cnc_tot_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt Over 180 Days Currently Not Collectable Amount",
+                    "format": "10.2"
+                  },
+                  "debt_nef_top_cs_in_bnkrcy_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt Not Eligible for TOP Cross-Servicing in Bankruptcy Amount",
+                    "format": "10.2"
+                  },
+                  "debt_nef_top_cs_in_fb_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt Not Eligible for TOP Cross-Servicing in Forebearance Amount",
+                    "format": "10.2"
+                  },
+                  "debt_nef_top_cs_in_fc_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt Not Eligible for TOP Cross-Servicing in Foreclosure Amount",
+                    "format": "10.2"
+                  },
+                  "debt_nef_top_cs_othr_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt Not Eligible for TOP Cross-Servicing Other Amount",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_cs_rate_amt_old": {
+                    "type": "number",
+                    "description": "Referred Debt to Cross-Servicing Rate Amount",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_cs_rate_nbr_old": {
+                    "type": "number",
+                    "description": "Referred Debt to Cross-Servicing Rate Count",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_top_rate_amt_old": {
+                    "type": "number",
+                    "description": "Referred Debt to TOP Rate Amount",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_top_rate_nbr_old": {
+                    "type": "number",
+                    "description": "Referred Debt to TOP Rate Count",
+                    "format": "10.2"
+                  },
+                  "curr_not_cltbl_debt_amt": {
+                    "type": "number",
+                    "description": "Currently Not Collectable Debt Amount",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_cs_debt_bal_amt": {
+                    "type": "number",
+                    "description": "Balance of Debt Eligible for Referral to Treasury for Collection Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_debt_elg_treas_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to TOP for Collection Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_debt_elg_treas_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to TOP for Collection Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_fs_debt_amt": {
+                    "type": "number",
+                    "description": "Foreign/Sovereign Debt Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_fs_debt_nbr": {
+                    "type": "number",
+                    "description": "Foreign/Sovereign Debt Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_litg_cltn_amt": {
+                    "type": "number",
+                    "description": "Debt in Litigation for Enforced Collection Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_litg_cltn_nbr": {
+                    "type": "number",
+                    "description": "Debt in Litigation for Enforced Collection Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_othr_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to TOP Other Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_othr_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to TOP Other Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_reqd_by_agcy_amt": {
+                    "type": "number",
+                    "description": "Debt Required to be Referred to TOP by Agency Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_reqd_by_agcy_nbr": {
+                    "type": "number",
+                    "description": "Debt Required to be Referred to TOP by Agency Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_debt_refrd_amt": {
+                    "type": "number",
+                    "description": "Debt Referred to Treasury Offset Program Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_debt_refrd_nbr": {
+                    "type": "number",
+                    "description": "Debt Referred to Treasury Offset Program Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_debt_refrd_cs_amt": {
+                    "type": "number",
+                    "description": "Debt Referred to TOP through Cross-Servicing Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_top_debt_refrd_cs_nbr": {
+                    "type": "number",
+                    "description": "Debt Referred to TOP through Cross-Servicing Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_elg_treas_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury for Collection Dollars ",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_elg_treas_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury for Collection Number ",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_fs_debt_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury Foreign/Sovereign Debt Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_fs_debt_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury Foreign/Sovereign Debt Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_in_litg_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury in Litigation for Enforced Collection Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_in_litg_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury in Litigation for Enforced Collection Number",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_priv_cltn_amt": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury At Private Collection Agencies Dollars",
+                    "format": "10.2"
+                  },
+                  "debt_ef_treas_cs_priv_cltn_nbr": {
+                    "type": "number",
+                    "description": "Debt Eligible for Referral to Treasury At Private Collection Agencies Number",
+                    "format": "10.2"
+                  }
+                }
+              }
+      400:
+        body:
+          application/json:
+            example: |
+              {"error":"Invalid Query Param","message":"Invalid query parameter 'foo' with value '[error]'.  For more information please see the documentation."}

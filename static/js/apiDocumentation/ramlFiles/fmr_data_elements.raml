@@ -1,0 +1,279 @@
+#%RAML 0.8
+---
+title: FMR Data Elements
+version: v1
+baseUri: https://api.transparency.treasury.gov/services/api
+protocols: [ HTTPS ]
+
+/fiscal_service/v1/reference/data_registry/fmr_data_elements:
+  description: FMR Data Elements
+  get:
+    queryParameters:
+      fields:
+        displayName: Field List
+        type: string
+        description: Field parameter accepts a comma separated list of field names that the user wants to be returned in the response.
+        example: fields=xxx,yyy,zzz
+        required: false
+        default:
+      filter:
+        displayName: Filter
+        type: string
+        description: Filter is used to apply logic criteria to each field if necessary (lt, gt, lte, gte, eq, in).
+        example: 1) filter=xxx:eq:value,yyy:lt:1,zzz:gt:10  2) filter=reporting_fiscal_year:in:(2007,2008,2009,2010)
+        required: false
+        default:
+      sort:
+        displayName: Sorting
+        type: string
+        description: Sorting parameter accepts a comma separated list of field names that the user wants to sort the response by.
+        example: sort=xxx,-yyy,zzz
+        required: false
+        default:
+      pretty_print:
+        displayName: Pretty Print
+        type: string
+        description: Pretty print will put carriage returns and indentation in the json response so that it can be easily read by a human.
+        example: pretty_print=yes
+        required: false
+        default: no
+      format:
+        displayName: Response Format
+        type: string
+        description: Format is used to define how output method for the response (json, xml, csv).
+        example: format=json
+        required: false
+        default: json
+      limit:
+        displayName: Row Limit
+        type: number
+        description: Limit will set the number of rows that are returned in a request.
+        example: limit=100
+        required: false
+        default: 100
+      offset:
+        displayName: Row Offset
+        type: number
+        description: Offset will set the starting point of the pagination.
+        example: offset=0
+        required: false
+        default: 0
+    responses:
+      200:
+        body:
+          application/xml:
+          application/csv:
+          application/json:
+            schema: |
+              {
+                "type": "object",
+                "$schema": "http://json-schema.org/draft-03/schema",
+                "id": "http://jsonschema.net",
+                "properties": {
+                  "total_digits_nr": {
+                    "type": "number",
+                    "description": "Total Digits Number",
+                    "format": "10.2"
+                  },
+                  "fraction_digits_nr": {
+                    "type": "number",
+                    "description": "Fraction Digits Number",
+                    "format": "10.2"
+                  },
+                  "schema": {
+                    "type": "string",
+                    "description": "Schema",
+                    "format": ""
+                  },
+                  "implementing_systems_desc": {
+                    "type": "string",
+                    "description": "Implementing Systems Description",
+                    "format": ""
+                  },
+                  "de_id": {
+                    "type": "number",
+                    "description": "Data Element ID",
+                    "format": "10.2"
+                  },
+                  "reporting_fiscal_year": {
+                    "type": "year",
+                    "description": "Fiscal Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_calendar_year": {
+                    "type": "year",
+                    "description": "Calendar Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_calendar_month": {
+                    "type": "month",
+                    "description": "Calendar Month Number",
+                    "format": "MM"
+                  },
+                  "reporting_calendar_day": {
+                    "type": "day",
+                    "description": "Calendar Day Number",
+                    "format": "DD"
+                  },
+                  "reporting_fiscal_quarter": {
+                    "type": "quarter",
+                    "description": "Fiscal Quarter Number",
+                    "format": "Q"
+                  },
+                  "reporting_fiscal_month": {
+                    "type": "month",
+                    "description": "Fiscal Month Number",
+                    "format": "MM"
+                  },
+                  "reporting_calendar_quarter": {
+                    "type": "quarter",
+                    "description": "Calendar Quarter Number",
+                    "format": "Q"
+                  },
+                  "src_line_nbr": {
+                    "type": "number",
+                    "description": "Source Line Number",
+                    "format": "10.2"
+                  },
+                  "admin_id": {
+                    "type": "number",
+                    "description": "Admin ID",
+                    "format": "10.2"
+                  },
+                  "responsible_bus_line_code": {
+                    "type": "string",
+                    "description": "Responsible Business Line Code",
+                    "format": ""
+                  },
+                  "response_bus_line_name": {
+                    "type": "string",
+                    "description": "Responsible Business Line Name",
+                    "format": ""
+                  },
+                  "business_owner_code": {
+                    "type": "string",
+                    "description": "Business Owner Code",
+                    "format": ""
+                  },
+                  "business_owner_name": {
+                    "type": "string",
+                    "description": "Business Owner Name",
+                    "format": ""
+                  },
+                  "admin_name": {
+                    "type": "string",
+                    "description": "Admin Name",
+                    "format": ""
+                  },
+                  "optimized_name": {
+                    "type": "string",
+                    "description": "Optimized Name",
+                    "format": ""
+                  },
+                  "admin_long_name": {
+                    "type": "string",
+                    "description": "Admin Long Name",
+                    "format": ""
+                  },
+                  "bus_definition": {
+                    "type": "string",
+                    "description": "Business Definition",
+                    "format": ""
+                  },
+                  "business_context": {
+                    "type": "string",
+                    "description": "Business Context",
+                    "format": ""
+                  },
+                  "registration_status": {
+                    "type": "string",
+                    "description": "Registration Status",
+                    "format": ""
+                  },
+                  "admin_status": {
+                    "type": "string",
+                    "description": "Admin Status",
+                    "format": ""
+                  },
+                  "version_id": {
+                    "type": "string",
+                    "description": "Version ID",
+                    "format": ""
+                  },
+                  "data_security_code": {
+                    "type": "string",
+                    "description": "Data Security Code",
+                    "format": ""
+                  },
+                  "effective_date": {
+                    "type": "date",
+                    "description": "Effective Date",
+                    "format": "YYYY-MM-DD"
+                  },
+                  "published_date": {
+                    "type": "date",
+                    "description": "Published Date",
+                    "format": "YYYY-MM-DD"
+                  },
+                  "data_contact_name": {
+                    "type": "string",
+                    "description": "Data Contact Name",
+                    "format": ""
+                  },
+                  "data_contact_email": {
+                    "type": "string",
+                    "description": "Data Contact E-mail",
+                    "format": ""
+                  },
+                  "data_type_code": {
+                    "type": "string",
+                    "description": "Data Type Code",
+                    "format": ""
+                  },
+                  "representation_class": {
+                    "type": "string",
+                    "description": "Representation Class",
+                    "format": ""
+                  },
+                  "char_text_code": {
+                    "type": "string",
+                    "description": "Character Text Code",
+                    "format": ""
+                  },
+                  "char_case_code": {
+                    "type": "string",
+                    "description": "Character Case Code",
+                    "format": ""
+                  },
+                  "punctuation_indicator": {
+                    "type": "string",
+                    "description": "Punctuation Indicator",
+                    "format": ""
+                  },
+                  "special_char_indicator": {
+                    "type": "string",
+                    "description": "Special Character Indicator",
+                    "format": ""
+                  },
+                  "white_space_indicator": {
+                    "type": "string",
+                    "description": "White Space Indicator",
+                    "format": ""
+                  },
+                  "min_length": {
+                    "type": "number",
+                    "description": "Minimum Length",
+                    "format": "10.2"
+                  },
+                  "max_length": {
+                    "type": "number",
+                    "description": "Maximum Length",
+                    "format": "10.2"
+                  },
+                }
+              }
+      400:
+        body:
+          application/json:
+            example: |
+              {"error":"Invalid Query Param","message":"Invalid query parameter 'foo' with value '[error]'.  For more information please see the documentation."}

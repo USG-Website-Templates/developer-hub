@@ -1,0 +1,264 @@
+#%RAML 0.8
+---
+title: TROR-Analytics Collections on Receivables
+version: v1
+baseUri: https://transparency.treasury.gov:443/services/api
+protocols: [ HTTP ]
+
+/fiscal_service/v1/debt/tror/analytics_collections_on_receivables:
+  description: TROR-Analytics Collections on Receivables
+  get:
+    queryParameters:
+      fields:
+        displayName: Field List
+        type: string
+        description: Field parameter accepts a comma separated list of field names that the user wants to be returned in the response.
+        example: fields=xxx,yyy,zzz
+        required: false
+        default: 
+      filter:
+        displayName: Filter
+        type: string
+        description: Filter is used to apply logic criteria to each field if necessary (lt, gt, lte, gte, eq, in).
+        example: 1) filter=xxx:eq:value,yyy:lt:1,zzz:gt:10  2) filter=reporting_fiscal_year:in:(2007,2008,2009,2010)
+        required: false
+        default: 
+      sort:
+        displayName: Sorting
+        type: string
+        description: Sorting parameter accepts a comma separated list of field names that the user wants to sort the response by.
+        example: sort=xxx,-yyy,zzz
+        required: false
+        default: 
+      pretty_print:
+        displayName: Pretty Print
+        type: string
+        description: Pretty print will put carriage returns and indentation in the json response so that it can be easily read by a human.
+        example: pretty_print=yes
+        required: false
+        default: no
+      format:
+        displayName: Response Format
+        type: string
+        description: Format is used to define how output method for the response (json, xml, csv).
+        example: format=json
+        required: false
+        default: json
+      limit:
+        displayName: Row Limit
+        type: number
+        description: Limit will set the number of rows that are returned in a request.
+        example: limit=100
+        required: false
+        default: 100
+      offset:
+        displayName: Row Offset
+        type: number
+        description: Offset will set the starting point of the pagination.
+        example: offset=0
+        required: false
+        default: 0
+    responses:
+      200:
+        body:
+          application/xml:
+          application/csv:
+          application/json:
+            schema: |
+              {
+                "type": "object",
+                "$schema": "http://json-schema.org/draft-03/schema",
+                "id": "http://jsonschema.net",
+                "properties": {
+                  "reporting_calendar_year": {
+                    "type": "year",
+                    "description": "Calendar Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_fiscal_year": {
+                    "type": "year",
+                    "description": "Fiscal Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_calendar_quarter": {
+                    "type": "string",
+                    "description": "Calendar Quarter Number",
+                    "format": ""
+                  },
+                  "reporting_fiscal_quarter": {
+                    "type": "string",
+                    "description": "Fiscal Quarter Number",
+                    "format": ""
+                  },
+                  "reporting_calendar_month": {
+                    "type": "month",
+                    "description": "Calendar Month Number",
+                    "format": "MM"
+                  },
+                  "reporting_fiscal_month": {
+                    "type": "month",
+                    "description": "Fiscal Month Number",
+                    "format": "MM"
+                  },
+                  "reporting_quarter_end_date": {
+                    "type": "date",
+                    "description": "Reporting Quarter End Date",
+                    "format": "YYYY-MM-DD"
+                  },
+                  "reporting_quarter_end_year": {
+                    "type": "year",
+                    "description": "Reporting Quarter End Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_window_status": {
+                    "type": "string",
+                    "description": "Reporting Window Status",
+                    "format": ""
+                  },
+                  "receivable_type_id": {
+                    "type": "number",
+                    "description": "Receivable Type ID",
+                    "format": "10.2"
+                  },
+                  "receivable_type": {
+                    "type": "number",
+                    "description": "Receivable Type",
+                    "format": "10.2"
+                  },
+                  "receivable_type_description": {
+                    "type": "string",
+                    "description": "Receivable Type Descriptions",
+                    "format": ""
+                  },
+                  "is_receivable_type_active": {
+                    "type": "string",
+                    "description": "Receivable Type Active Indicator",
+                    "format": ""
+                  },
+                  "funding_type_id": {
+                    "type": "number",
+                    "description": "Funding Type ID",
+                    "format": "10.2"
+                  },
+                  "funding_type": {
+                    "type": "number",
+                    "description": "Funding Type",
+                    "format": "10.2"
+                  },
+                  "funding_type_description": {
+                    "type": "string",
+                    "description": "Funding Type Description",
+                    "format": ""
+                  },
+                  "end_balance_amount": {
+                    "type": "number",
+                    "description": "Ending Balance Amount",
+                    "format": "10.2"
+                  },
+                  "end_balance_count": {
+                    "type": "number",
+                    "description": "Ending Balance Count",
+                    "format": "10.2"
+                  },
+                  "debt_by_category_amount": {
+                    "type": "number",
+                    "description": "Delinquent Debt By Category Amount",
+                    "format": "10.2"
+                  },
+                  "delinquency_rate_amount": {
+                    "type": "number",
+                    "description": "Delinquent Rate Amount",
+                    "format": "10.2"
+                  },
+                  "collections_total_amount": {
+                    "type": "number",
+                    "description": "Collections Total Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_rate_percent_amount": {
+                    "type": "number",
+                    "description": "Delinquency Rate Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_rate_percent_count": {
+                    "type": "number",
+                    "description": "Delinquency Rate Count",
+                    "format": "10.2"
+                  },
+                  "cltns_by_agency_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By Agency Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_3rd_pty_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By 3rd Party Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_asset_sls_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By Asset Sales Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_top_and_cs_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By TOP and CS Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_sls_aft_fc_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By Sales After Foreclosure Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_doj_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By DOJ Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_other_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By Other Amount",
+                    "format": "10.2"
+                  },
+                  "collection_agency_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by Agency Amount",
+                    "format": "10.2"
+                  },
+                  "collection_third_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by third party Amount",
+                    "format": "10.2"
+                  },
+                  "collection_asset_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by Asset Sales Amount",
+                    "format": "10.2"
+                  },
+                  "collection_top_cross_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by TOP and CS Amount",
+                    "format": "10.2"
+                  },
+                  "collection_sale_after_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by Sales after Foreclosure Amount",
+                    "format": "10.2"
+                  },
+                  "collection_doj_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by DOJ Amount",
+                    "format": "10.2"
+                  },
+                  "collection_other_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables Other Amount",
+                    "format": "10.2"
+                  }
+                }
+              }
+      400:
+        body:
+          application/json:
+            example: |
+              {"error":"Invalid Query Param","message":"Invalid query parameter 'foo' with value '[error]'.  For more information please see the documentation."}

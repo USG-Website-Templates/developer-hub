@@ -1,0 +1,231 @@
+li:nth-child(n) > input[type=checkbox] {
+
+	~ ul{
+		display: none;
+	}
+
+	+ dl > dt > label > i.collapse{
+		display: none;
+	}
+	
+	+ dl > dt > label > i.expand{
+		display: inline-block;
+	}
+}
+
+li:nth-child(n) > input[type=checkbox]:checked {
+
+	~ ul{
+		display: block;
+	}
+
+	+ dl > dt > label > i.collapse{
+		display: inline-block;
+	}
+
+	+ dl > dt > label > i.expand{
+		display: none;
+	}	
+}
+
+input[type=checkbox] + dl > dt > label{
+	cursor: pointer
+}
+
+ul {
+	list-style: none
+}
+
+.expand-collapse-section{
+	display: inline-block;
+	width: 100%;
+
+	div{
+		float: right;
+	}
+}
+
+
+dt.part-of-url > label{
+	color: black;
+	font-size: 16px;
+}
+
+dt > label{
+    color: #828181;
+    font-size: 14px;
+}
+
+.loader-container{	
+	loader-color: #fff;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;  
+	display: flex;  
+	justify-content: center;
+	align-items: center;
+
+	.loader {
+		color: #4684ee;
+
+		font-family: Consolas, Menlo, Monaco, monospace;
+		font-weight: bold;
+		opacity: 0.8;
+
+		span {
+			display: inline-block;
+			animation: pulse 0.4s alternate infinite ease-in-out;
+			&:nth-child(odd) {
+	  			animation-delay: 0.4s;
+			}
+		}
+	}
+
+	@keyframes pulse {
+		to {
+			transform: scale(0.8);
+			opacity: 0.5;
+		}
+	}
+}
+
+div.endpoint-container > table {
+	table-layout: fixed;
+	width: 100%;
+}
+
+.endpoint-container{
+	clear: both;
+}
+
+.available-fields-heading {
+	clear: both;
+}
+
+.available-fields-heading > label{
+	font-size: 14px;
+	float: right;
+	cursor: pointer;
+}
+
+input[type=checkbox].available-fields {
+	
+	~ dd table.available-fields-table  {
+		display: none;
+	}
+}
+
+input[type=checkbox].available-fields:checked {
+	
+	~ dd table.available-fields-table  {
+		display: table;
+	}
+}
+
+.back-to-top-link{
+	float: right;
+}
+
+.parameter-definition-container{
+	clear: both;
+}
+
+.parameter-definition-heading{
+	clear: both;
+}
+
+.parameter-definition-heading > label{
+	font-size: 14px;
+	float: right;
+	cursor: pointer;
+}
+
+input[type=checkbox].parameter-definition {
+	
+	~ dd table.parameter-definition-table  {
+		display: none;
+	}
+}
+
+input[type=checkbox].parameter-definition:checked {
+	
+	~ dd table.parameter-definition-table  {
+		display: table;
+	}
+}
+
+.url-copy-container{
+	position: relative;
+
+	div.pre-container > pre{
+		padding-bottom: 10px;
+	}
+
+	span{
+		z-index: 2;
+	}
+
+	div.copy-link-to-clipboard-container{
+		position:absolute;
+		bottom: 0px;
+		right: 2px;
+	}
+
+	i.copy-link-to-clipboard{
+		color: rgba(0,0,0,0.2);
+		cursor: pointer;
+		z-index: 1;
+	}
+
+	i.copy-link-to-clipboard:hover{
+		color: black;
+	}
+}
+
+.parameter-definition-table > dt:nth-child(n){
+	font-size: 10px
+}
+
+.list-operations-table{
+	width: 100%;
+}
+
+.not-part-of-url > a {
+	font-size: 14px;
+}
+
+.back-to-top-link{
+	font-size: 14px;
+}
+
+.try-it-out-button{
+	cursor: pointer;
+	color: gray;
+	font-size: 14px;
+	float: right;
+}
+
+.operations-heading > label{
+	font-size: 14px;
+	float: right;
+	cursor: pointer;
+}
+
+input[type=checkbox].operations {
+	
+	~ dd table.list-operations-table {
+		display: none;
+	}
+}
+
+input[type=checkbox].operations:checked {
+	
+	~ dd table.list-operations-table {
+		display: table;
+	}
+}
+
+table{
+	min-width: 350px;
+}
