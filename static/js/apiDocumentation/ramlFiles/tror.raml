@@ -1,0 +1,1379 @@
+#%RAML 0.8
+---
+title: TROR
+version: v1
+baseUri: https://api.transparency.treasury.gov/services/api
+protocols: [ HTTP ]
+
+/fiscal_service/v1/debt/tror:
+  description: TROR
+  get:
+    queryParameters:
+      fields:
+        displayName: Field List
+        type: string
+        description: Field parameter accepts a comma separated list of field names that the user wants to be returned in the response.
+        example: fields=xxx,yyy,zzz
+        required: false
+        default:
+      filter:
+        displayName: Filter
+        type: string
+        description: Filter is used to apply logic criteria to each field if necessary (lt, gt, lte, gte, eq, in).
+        example: 1) filter=xxx:eq:value,yyy:lt:1,zzz:gt:10  2) filter=reporting_fiscal_year:in:(2007,2008,2009,2010)
+        required: false
+        default:
+      sort:
+        displayName: Sorting
+        type: string
+        description: Sorting parameter accepts a comma separated list of field names that the user wants to sort the response by.
+        example: sort=xxx,-yyy,zzz
+        required: false
+        default:
+      pretty_print:
+        displayName: Pretty Print
+        type: string
+        description: Pretty print will put carriage returns and indentation in the json response so that it can be easily read by a human.
+        example: pretty_print=yes
+        required: false
+        default: no
+      format:
+        displayName: Response Format
+        type: string
+        description: Format is used to define how output method for the response (json, xml, csv).
+        example: format=json
+        required: false
+        default: json
+      limit:
+        displayName: Row Limit
+        type: number
+        description: Limit will set the number of rows that are returned in a request.
+        example: limit=100
+        required: false
+        default: 100
+      offset:
+        displayName: Row Offset
+        type: number
+        description: Offset will set the starting point of the pagination.
+        example: offset=0
+        required: false
+        default: 0
+    responses:
+      200:
+        body:
+          application/xml:
+          application/csv:
+          application/json:
+            schema: |
+              {
+                "type": "object",
+                "$schema": "http://json-schema.org/draft-03/schema",
+                "id": "http://jsonschema.net",
+                "properties": {
+                  "ddebt_1_2_yrs_nbr": {
+                    "type": "number",
+                    "description": "Deliquent Debt 1-2 years Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_30_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-30 Days Count",
+                    "format": "10.2"
+                  },
+                  "cnc_debt_treas_cs_rate_amt": {
+                    "type": "number",
+                    "description": "CNC Debt Treasury CS Amount",
+                    "format": "10.2"
+                  },
+                  "cnc_debt_treas_cs_rate_nbr": {
+                    "type": "number",
+                    "description": "CNC Debt Treasury CS Count",
+                    "format": "10.2"
+                  },
+                  "cnc_debt_treas_off_rate_amt": {
+                    "type": "number",
+                    "description": "CNC Debt Treasury Offset Amount",
+                    "format": "10.2"
+                  },
+                  "cnc_debt_treas_off_rate_nbr": {
+                    "type": "number",
+                    "description": "CNC Debt Treasury Offset Count",
+                    "format": "10.2"
+                  },
+                  "cnc_debt_by_other_rate_amt": {
+                    "type": "number",
+                    "description": "CNC Debt By Other Amount",
+                    "format": "10.2"
+                  },
+                  "cnc_debt_by_other_rate_nbr": {
+                    "type": "number",
+                    "description": "CNC Debt By Other Count",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_top_rate_amt": {
+                    "type": "number",
+                    "description": "Referred Debt TOP Amount Post Data Act",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_top_rate_nbr": {
+                    "type": "number",
+                    "description": "Referred Debt TOP Count Post Data Act",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_cs_rate_amt": {
+                    "type": "number",
+                    "description": "Referred Debt CS Amount Post Data Act",
+                    "format": "10.2"
+                  },
+                  "refrd_debt_cs_rate_nbr": {
+                    "type": "number",
+                    "description": "Referred Debt CS Count Post Data Act",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_30_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-30 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_31_60_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 31-60 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_31_60_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 31-60 Days Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_61_90_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 61-90 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_61_90_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 61-90 Days Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_91_120_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 91-120 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_91_120_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 91-120 Days Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_121_150_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 121-150 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_121_150_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 121-150 Days Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_151_180_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 151-180 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_151_180_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 151-180 Days Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_90_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-90 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_90_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-90 Days Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_91_180_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 91-180 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_91_180_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 91-180 Days Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_181_365_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 181-365 Days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_181_365_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 181-365 Days Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_2_yrs_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-2 Years Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_2_yrs_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-2 Years Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_2_6_yrs_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 2-6 Years Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_2_6_yrs_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 2-6 Years Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_to_90_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1- 90 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_to_90_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1- 90 days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_91_to_180_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 91- 180 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_91_to_180_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 91- 180 days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_181_365_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 181- 365 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_181_365_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 181- 365 days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_2_yrs_amt": {
+                    "type": "number",
+                    "description": "Deliquent Debt 1-2 years Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_2_6_yrs_nbr": {
+                    "type": "number",
+                    "description": "Deliquent Debt 2-6 years Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_2_6_yrs_amt": {
+                    "type": "number",
+                    "description": "Deliquent Debt 2-6 years Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_6_10_yrs_nbr": {
+                    "type": "number",
+                    "description": "Deliquent Debt 6-10 years Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_6_10_yrs_amt": {
+                    "type": "number",
+                    "description": "Deliquent Debt 6-10 years Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_ovr_10_yrs_nbr": {
+                    "type": "number",
+                    "description": "Deliquent Debt over 10 years Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_ovr_10_yrs_amt": {
+                    "type": "number",
+                    "description": "Deliquent Debt over 10 years Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_in_bankruptcy_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt less than 120 days in Bankruptcy Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_in_bankruptcy_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Bankruptcy Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_forbea_appeal_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Forebearance Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_forbea_appeal_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Forebearance Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_foreclosure_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Foreclosure Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_foreclosure_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Foreclosure Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_prv_cltn_agcy_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days at Private Collection Agencies Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_prv_cltn_agcy_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days at Private Collection Agencies Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_in_litigation_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Litigation Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_in_litigation_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Litigation Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_intern_offset_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Internal Offset Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_intern_offset_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Internal Offset Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_wage_garnish_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Wage Garnishment Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_wage_garnish_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Wage Garnishment Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_treas_for_cs_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Treasury for CS Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_treas_for_cs_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Treasury for CS Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_treas_offset_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Treasury for Offset Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_treas_offset_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days in Treasury for Offset Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_at_agency_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days at Agency Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_at_agency_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days at Agency Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_other_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days Other Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_other_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days Other Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_days_tot_nbr": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days Total Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_days_tot_amt": {
+                    "type": "number",
+                    "description": "Deliqnuent Debt less than 120 days Total Number",
+                    "format": "10.2"
+                  },
+                  "reporting_quarter_end_date": {
+                    "type": "date",
+                    "description": "Reporting Quarter End Date",
+                    "format": "YYYY-MM-DD"
+                  },
+                  "reporting_quarter_end_year": {
+                    "type": "year",
+                    "description": "Reporting Quarter End Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_calendar_year": {
+                    "type": "year",
+                    "description": "Calendar Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_fiscal_year": {
+                    "type": "year",
+                    "description": "Fiscal Year",
+                    "format": "YYYY"
+                  },
+                  "reporting_calendar_quarter": {
+                    "type": "quarter",
+                    "description": "Calendar Quarter Number",
+                    "format": "Q"
+                  },
+                  "reporting_fiscal_quarter": {
+                    "type": "quarter",
+                    "description": "Fiscal Quarter Number",
+                    "format": "Q"
+                  },
+                  "reporting_calendar_month": {
+                    "type": "month",
+                    "description": "Calendar Month Number",
+                    "format": "MM"
+                  },
+                  "reporting_fiscal_month": {
+                    "type": "month",
+                    "description": "Fiscal Month Number",
+                    "format": "MM"
+                  },
+                  "reporting_window_status": {
+                    "type": "string",
+                    "description": "Reporting Window Status",
+                    "format": ""
+                  },
+                  "receivable_type_id": {
+                    "type": "number",
+                    "description": "Receivable Type ID",
+                    "format": "10.2"
+                  },
+                  "receivable_type": {
+                    "type": "number",
+                    "description": "Receivable Type",
+                    "format": "10.2"
+                  },
+                  "receivable_type_description": {
+                    "type": "string",
+                    "description": "Receivable Type Descriptions",
+                    "format": ""
+                  },
+                  "is_receivable_type_active": {
+                    "type": "string",
+                    "description": "Receivable Type Active Indicator",
+                    "format": ""
+                  },
+                  "funding_type_id": {
+                    "type": "number",
+                    "description": "Funding Type ID",
+                    "format": "10.2"
+                  },
+                  "funding_type": {
+                    "type": "number",
+                    "description": "Funding Type",
+                    "format": "10.2"
+                  },
+                  "funding_type_description": {
+                    "type": "string",
+                    "description": "Funding Type Description",
+                    "format": ""
+                  },
+                  "end_balance_amount": {
+                    "type": "number",
+                    "description": "Ending Balance Amount",
+                    "format": "10.2"
+                  },
+                  "end_balance_count": {
+                    "type": "number",
+                    "description": "Ending Balance Count",
+                    "format": "10.2"
+                  },
+                  "debt_by_category_amount": {
+                    "type": "number",
+                    "description": "Delinquent Debt By Category Amount",
+                    "format": "10.2"
+                  },
+                  "reported_irs_1099c_amount": {
+                    "type": "number",
+                    "description": "Reported to IRS 1099C Amount",
+                    "format": "10.2"
+                  },
+                  "reported_irs_1099c_count": {
+                    "type": "number",
+                    "description": "Reported to IRS 1099C Count",
+                    "format": "10.2"
+                  },
+                  "debt_previous_year_amount": {
+                    "type": "number",
+                    "description": "Debts Collected Previous Calendar Year Amount",
+                    "format": "10.2"
+                  },
+                  "debt_previous_year_count": {
+                    "type": "number",
+                    "description": "Debts Collected Previous Calendar Year Count",
+                    "format": "10.2"
+                  },
+                  "a129_exclusions_amount": {
+                    "type": "number",
+                    "description": "OMB A129 CNC Exclusions Amount",
+                    "format": "10.2"
+                  },
+                  "a129_exclusions_count": {
+                    "type": "number",
+                    "description": "OMB A129 CNC Exclusions Number",
+                    "format": "10.2"
+                  },
+                  "delinquent_over_2_years_amount": {
+                    "type": "number",
+                    "description": "Delinquent Debt Over 2 Years Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_over_2_years_count": {
+                    "type": "number",
+                    "description": "Delinquent Debt Over 2 Years Count",
+                    "format": "10.2"
+                  },
+                  "debt_by_category_count": {
+                    "type": "number",
+                    "description": "Delinquent Debt By Category Count",
+                    "format": "10.2"
+                  },
+                  "reported_consumer_amount": {
+                    "type": "number",
+                    "description": "Credit Bureau Consumer Amount",
+                    "format": "10.2"
+                  },
+                  "reported_consumer_count": {
+                    "type": "number",
+                    "description": "Credit Bureau Consumer Count",
+                    "format": "10.2"
+                  },
+                  "reported_commercial_amount": {
+                    "type": "number",
+                    "description": "Credit Bureau Commercial Amount",
+                    "format": "10.2"
+                  },
+                  "reported_commercial_count": {
+                    "type": "number",
+                    "description": "Credit Bureau Commercial Count",
+                    "format": "10.2"
+                  },
+                  "non_collectable_debt_amount": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_debt_by_age_amount": {
+                    "type": "number",
+                    "description": "Delinquent Debt By Age Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_debt_amount": {
+                    "type": "number",
+                    "description": "Collectable Debt Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_debt_by_age_count": {
+                    "type": "number",
+                    "description": "Delinquent Debt By Age Count",
+                    "format": "10.2"
+                  },
+                  "collectable_debt_count": {
+                    "type": "number",
+                    "description": "Collectable Debt Count",
+                    "format": "10.2"
+                  },
+                  "write_off_amount": {
+                    "type": "number",
+                    "description": "Write Offs Total Amount",
+                    "format": "10.2"
+                  },
+                  "write_off_count": {
+                    "type": "number",
+                    "description": "Write Offs Total Count",
+                    "format": "10.2"
+                  },
+                  "delinquent_commercial_amount": {
+                    "type": "number",
+                    "description": "Delinquent Debt Commercial Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_commercial_count": {
+                    "type": "number",
+                    "description": "Delinquent Debt Commercial Count",
+                    "format": "10.2"
+                  },
+                  "delinquent_consumer_amount": {
+                    "type": "number",
+                    "description": "Delinquent Debt Consumer Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_consumer_count": {
+                    "type": "number",
+                    "description": "Delinquent Debt Consumer Count",
+                    "format": "10.2"
+                  },
+                  "foreign_sovereign_gov_amount": {
+                    "type": "number",
+                    "description": "Delinquent Debt Foreign Sovereign Government Dollar Amount",
+                    "format": "10.2"
+                  },
+                  "state_local_government_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt State and Local Government Amount",
+                    "format": "10.2"
+                  },
+                  "foreign_sovereign_amount": {
+                    "type": "number",
+                    "description": "Foreign Sovereign Government Amount",
+                    "format": "10.2"
+                  },
+                  "state_local_amount": {
+                    "type": "number",
+                    "description": "State and Local Government Amount",
+                    "format": "10.2"
+                  },
+                  "rescheduled_debt_amount": {
+                    "type": "number",
+                    "description": "Rescheduled Debt Delinquent Amount",
+                    "format": "10.2"
+                  },
+                  "rescheduled_non_debt_amount": {
+                    "type": "number",
+                    "description": "Rescheduled Debt Non-Delinquent Amount",
+                    "format": "10.2"
+                  },
+                  "interest_late_charge_amount": {
+                    "type": "number",
+                    "description": "Interest and Late Charge Amount",
+                    "format": "10.2"
+                  },
+                  "written_off_closed_out_amount": {
+                    "type": "number",
+                    "description": "Written Off and Closed-Out Amount",
+                    "format": "10.2"
+                  },
+                  "written_off_closed_out_count": {
+                    "type": "number",
+                    "description": "Written Off and Closed-Out Count",
+                    "format": "10.2"
+                  },
+                  "collections_total_amount": {
+                    "type": "number",
+                    "description": "Collections Total Amount",
+                    "format": "10.2"
+                  },
+                  "new_receivables_amount": {
+                    "type": "number",
+                    "description": "New Receivables Amount",
+                    "format": "10.2"
+                  },
+                  "accruals_amount": {
+                    "type": "number",
+                    "description": "Accruals Amount",
+                    "format": "10.2"
+                  },
+                  "adjusted_total_amount": {
+                    "type": "number",
+                    "description": "Adjusted Total Amount",
+                    "format": "10.2"
+                  },
+                  "beginning_fiscal_year_balance": {
+                    "type": "number",
+                    "description": "Beginning Fiscal Year Balance",
+                    "format": "10.2"
+                  },
+                  "collection_asset_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by Asset Sales Amount",
+                    "format": "10.2"
+                  },
+                  "nc_debt_treas_cross_count": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt by Treasury Cross-Servicing Count",
+                    "format": "10.2"
+                  },
+                  "nc_debt_other_count": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt by Other Count",
+                    "format": "10.2"
+                  },
+                  "collectable_litigation_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt by Litigation Amount",
+                    "format": "10.2"
+                  },
+                  "nc_debt_other_amount": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt by Other Amount",
+                    "format": "10.2"
+                  },
+                  "noncollectable_debt_pca_amount": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt by Private Collection Agency Amount",
+                    "format": "10.2"
+                  },
+                  "noncollectable_debt_pca_count": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt by Private Collection Agency Count",
+                    "format": "10.2"
+                  },
+                  "nc_debt_treas_cross_amount": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt by Treasury Cross-Servicing Amount",
+                    "format": "10.2"
+                  },
+                  "nc_debt_treas_offset_amount": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt by Treasury Offset Amount",
+                    "format": "10.2"
+                  },
+                  "nc_debt_treas_offset_count": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt by Treasury Offset Count",
+                    "format": "10.2"
+                  },
+                  "not_reported_irs_1099c_amount": {
+                    "type": "number",
+                    "description": "Not Reported to IRS 1099C Amount",
+                    "format": "10.2"
+                  },
+                  "not_reported_irs_1099c_count": {
+                    "type": "number",
+                    "description": "Not Reported to IRS 1099C Count",
+                    "format": "10.2"
+                  },
+                  "collectable_pca_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent Debt at Private Collection Agency Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_internal_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt by Internal Offset Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_third_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt at Third Party Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_asset_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt by Asset Sales Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_wage_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt by Wage Garnishment Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_cross_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt by Treasury cross Servicing Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_agency_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt at Agency Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_other_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt by Other Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_to_30_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-30 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_to_30_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-30 days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_31_to_60_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 31-60 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_31_to_60_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 31-60 days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_61_to_90_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 61-90 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_61_to_90_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 61-90 days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_91_to_120_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 91-120 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_91_to_120_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 91-120 days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_121_to_150_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 121-150 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_121_to_150_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 121-150 days Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_151_to_180_days_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 151-180 days Number",
+                    "format": "10.2"
+                  },
+                  "ddebt_151_to_180_days_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 151-180 days Amount",
+                    "format": "10.2"
+                  },
+                  "non_collectable_debt_count": {
+                    "type": "number",
+                    "description": "Non-Collectable Debt Count",
+                    "format": "10.2"
+                  },
+                  "collection_agency_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by Agency Amount",
+                    "format": "10.2"
+                  },
+                  "collection_third_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by third party Amount",
+                    "format": "10.2"
+                  },
+                  "collection_sale_after_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by Sales after Foreclosure Amount",
+                    "format": "10.2"
+                  },
+                  "collection_doj_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by DOJ Amount",
+                    "format": "10.2"
+                  },
+                  "collection_top_cross_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables by TOP and CS Amount",
+                    "format": "10.2"
+                  },
+                  "collection_other_amount": {
+                    "type": "number",
+                    "description": "Collections on Receivables Other Amount",
+                    "format": "10.2"
+                  },
+                  "collectable_offset_amount": {
+                    "type": "number",
+                    "description": "Collections on Delinquent debt by TOP Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_6_10_yrs_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 6-10 Years Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_6_10_yrs_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 6-10 Years Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_ovr_10_yrs_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt over 10 Years Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_ovr_10_yrs_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt over 10 Years Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_bnkrptcy_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Bankrptcy Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_bnkrptcy_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Bankrptcy Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_fb_apeal_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days FB Appeal Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_fb_apeal_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days FB Appeal Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_foreclos_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Foreclosure Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_foreclos_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Foreclosure Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_pca_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days PCA Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_pca_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days PCA Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_litg_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Litigation Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_litg_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Litigation Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_intl_off_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Internal Offset Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_intl_off_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Internal Offset Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_wag_garn_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Wage Garnishment Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_wag_garn_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Wage Garnishment Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_treas_cs_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Treasury CS Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_treas_cs_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Treasury CS Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_treas_off_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Treasury Offset Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_treas_off_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Treasury Offset Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_at_agcy_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days At Agency Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_at_agcy_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days At Agency Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_other_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Other Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_other_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Other Count",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_total_rate_amt": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Total Amount",
+                    "format": "10.2"
+                  },
+                  "ddebt_1_120_total_rate_nbr": {
+                    "type": "number",
+                    "description": "Delinquent Debt 1-120 Days Total Count",
+                    "format": "10.2"
+                  },
+                  "delinquency_rate_amount": {
+                    "type": "number",
+                    "description": "Delinquent Rate Amount",
+                    "format": "10.2"
+                  },
+                  "rate_category_percent_amount": {
+                    "type": "number",
+                    "description": "Category Percent Amount",
+                    "format": "10.2"
+                  },
+                  "rate_category_percent_count": {
+                    "type": "number",
+                    "description": "Category Percent Count",
+                    "format": "10.2"
+                  },
+                  "debt_commercial_dollar_amount": {
+                    "type": "number",
+                    "description": "Commercial Dollar Amount",
+                    "format": "10.2"
+                  },
+                  "debt_commercial_dollar_count": {
+                    "type": "number",
+                    "description": "Commercial Dollar Count",
+                    "format": "10.2"
+                  },
+                  "debt_consumer_dollar_amount": {
+                    "type": "number",
+                    "description": "Consumer Dollar Amount",
+                    "format": "10.2"
+                  },
+                  "debt_consumer_dollar_count": {
+                    "type": "number",
+                    "description": "Consumer Dollar Count",
+                    "format": "10.2"
+                  },
+                  "debt_foreign_sovereign_amount": {
+                    "type": "number",
+                    "description": "Foreign Sovereign Amount",
+                    "format": "10.2"
+                  },
+                  "debt_foreign_sovereign_count": {
+                    "type": "number",
+                    "description": "Foreign Sovereign Count",
+                    "format": "10.2"
+                  },
+                  "cltns_on_non_ddebt_amt": {
+                    "type": "number",
+                    "description": "Collections On Non Delinquent Debt Amount",
+                    "format": "10.2"
+                  },
+                  "debt_state_local_amount": {
+                    "type": "number",
+                    "description": "State and Local Amount",
+                    "format": "10.2"
+                  },
+                  "debt_state_local_count": {
+                    "type": "number",
+                    "description": "State and Local Count",
+                    "format": "10.2"
+                  },
+                  "delinquent_rate_percent_amount": {
+                    "type": "number",
+                    "description": "Delinquent Rate Percent Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_rate_percent_count": {
+                    "type": "number",
+                    "description": "Delinquent Rate Percent Count",
+                    "format": "10.2"
+                  },
+                  "foreign_sovereign_percent": {
+                    "type": "number",
+                    "description": "Foreign Sovereign Percent",
+                    "format": "10.2"
+                  },
+                  "state_local_percent": {
+                    "type": "number",
+                    "description": "State and Local Percent",
+                    "format": "10.2"
+                  },
+                  "rescheduled_debt_percent": {
+                    "type": "number",
+                    "description": "Rescheduled Debt Percent",
+                    "format": "10.2"
+                  },
+                  "rescheduled_non_debt_percent": {
+                    "type": "number",
+                    "description": "Rescheduled Non Debt Percent",
+                    "format": "10.2"
+                  },
+                  "interest_late_charge_percent": {
+                    "type": "number",
+                    "description": "Interest Late Charge Percent",
+                    "format": "10.2"
+                  },
+                  "debt_rate_amount": {
+                    "type": "number",
+                    "description": "Debt Rate Amount",
+                    "format": "10.2"
+                  },
+                  "debt_rate_count": {
+                    "type": "number",
+                    "description": "Debt Rate Count",
+                    "format": "10.2"
+                  },
+                  "collection_rate_amount": {
+                    "type": "number",
+                    "description": "Collection Rate Amount",
+                    "format": "10.2"
+                  },
+                  "collection_rate_count": {
+                    "type": "number",
+                    "description": "Collection Rate Count",
+                    "format": "10.2"
+                  },
+                  "consumer_delinquent_amount": {
+                    "type": "number",
+                    "description": "Consumer Delinquent Amount",
+                    "format": "10.2"
+                  },
+                  "consumer_delinquent_count": {
+                    "type": "number",
+                    "description": "Consumer Delinquent Count",
+                    "format": "10.2"
+                  },
+                  "commercial_delinquent_amount": {
+                    "type": "number",
+                    "description": "Commercial Delinquent Amount",
+                    "format": "10.2"
+                  },
+                  "commercial_delinquent_count": {
+                    "type": "number",
+                    "description": "Commercial Delinquent Count",
+                    "format": "10.2"
+                  },
+                  "referral_to_top_amount": {
+                    "type": "number",
+                    "description": "Referral to TOP Amount",
+                    "format": "10.2"
+                  },
+                  "referral_to_top_count": {
+                    "type": "number",
+                    "description": "Referral to TOP Count",
+                    "format": "10.2"
+                  },
+                  "percent_top_referral_amount": {
+                    "type": "number",
+                    "description": "TOP Referral Percent Amount",
+                    "format": "10.2"
+                  },
+                  "close_out_count_rate": {
+                    "type": "number",
+                    "description": "Close Out Count",
+                    "format": "10.2"
+                  },
+                  "percent_top_referral_count": {
+                    "type": "number",
+                    "description": "TOP Referral Percent Count",
+                    "format": "10.2"
+                  },
+                  "close_out_amount_rate": {
+                    "type": "number",
+                    "description": "Close Out Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_rate_percent_amount": {
+                    "type": "number",
+                    "description": "Delinquency Rate Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_rate_percent_count": {
+                    "type": "number",
+                    "description": "Delinquency Rate Count",
+                    "format": "10.2"
+                  },
+                  "delinquent_two_amount_rate": {
+                    "type": "number",
+                    "description": "Delinquent Two Years Amount",
+                    "format": "10.2"
+                  },
+                  "delinquent_two_count_rate": {
+                    "type": "number",
+                    "description": "Delinquent Two Years Count",
+                    "format": "10.2"
+                  },
+                  "delinquency_rate_amount_wo": {
+                    "type": "number",
+                    "description": "Delinquency Rate Amount Write Offs",
+                    "format": "10.2"
+                  },
+                  "delinquency_rate_count_wo": {
+                    "type": "number",
+                    "description": "Delinquency Rate Count Write Offs",
+                    "format": "10.2"
+                  },
+                  "write_off_amount_percent": {
+                    "type": "number",
+                    "description": "Write Off Amount Percent",
+                    "format": "10.2"
+                  },
+                  "write_off_count_percent": {
+                    "type": "number",
+                    "description": "Write Off Count Percent",
+                    "format": "10.2"
+                  },
+                  "delinq_rate_amount": {
+                    "type": "number",
+                    "description": "Delinquent Rate Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_other_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By Other Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_by_pca_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt By PCA Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_as_rate_recv": {
+                    "type": "number",
+                    "description": "Collections As Receivables Rate",
+                    "format": "10.2"
+                  },
+                  "cltns_ddebt_rate_total_ddebt": {
+                    "type": "number",
+                    "description": "Collections Delinquent Debt Total",
+                    "format": "10.2"
+                  },
+                  "cltns_by_agency_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By Agency Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_3rd_pty_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By 3rd Party Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_asset_sls_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By Asset Sales Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_top_and_cs_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By TOP and CS Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_sls_aft_fc_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By Sales After Foreclosure Amount",
+                    "format": "10.2"
+                  },
+                  "cltns_by_doj_rate_amt": {
+                    "type": "number",
+                    "description": "Collections By DOJ Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_by_litg_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt By Litigation Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_int_off_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt Internal Offset Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_3rd_pty_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt 3rd Party Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_ast_sls_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt After Sales Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_garnish_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt Garnish Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_treas_cs_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt Treasury CS Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_treas_off_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt Treasury Offset Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_agency_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt Agency Amount",
+                    "format": "10.2"
+                  },
+                  "cltbl_ddebt_others_rate_amt": {
+                    "type": "number",
+                    "description": "Collectible Delinquent Debt Other Amount",
+                    "format": "10.2"
+                  },
+                  "cnc_debt_by_pca_rate_amt": {
+                    "type": "number",
+                    "description": "CNC Debt By PCA Amount",
+                    "format": "10.2"
+                  },
+                  "cnc_debt_by_pca_rate_nbr": {
+                    "type": "number",
+                    "description": "CNC Debt By PCA Count",
+                    "format": "10.2"
+                  },
+                  "foreign_sovereign_count": {
+                    "type": "number",
+                    "description": "Foreign Sovereign Government Count",
+                    "format": "10.2"
+                  },
+                  "state_local_government_count": {
+                    "type": "number",
+                    "description": "Delinquent Debt State and Local Government Count",
+                    "format": "10.2"
+                  }
+                }
+              }
+      400:
+        body:
+          application/json:
+            example: |
+              {"error":"Invalid Query Param","message":"Invalid query parameter 'foo' with value '[error]'.  For more information please see the documentation."}

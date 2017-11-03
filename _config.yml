@@ -12,7 +12,7 @@ defaults:
     scope:
       path: "" # an empty string here means all files in the project
     values:
-      organization-name: "Agency"
-      organization-url: "http://agency.gov"
+      organization-name: "Transparency.Treasury.Gov"
+      organization-url: "http://transparency.treasury.gov"
       organization-email: user@agency.gov
       source-code-policy.url: 

@@ -1,0 +1,517 @@
+﻿#%RAML 0.8
+---
+title: Financial Information Repository
+version: v1
+baseUri: https://api.transparency.treasury.gov/services/api
+protocols: [ HTTPS ]
+
+traits:
+  - pageable:
+    queryParameters:
+      fields:
+        displayName: Field List
+        type: string
+        description: Field parameter accepts a comma separated list of field names that the user wants to be returned in the response.
+        example: fields=xxx,yyy,zzz
+        required: false
+        default:
+      filter:
+        displayName: Filter
+        type: string
+        description: Filter is used to apply logic criteria to each field if necessary (lt, gt, lte, gte, eq, in).
+        example: 1) filter=xxx:eq:value,yyy:lt:1,zzz:gt:10  2) filter=reporting_fiscal_year:in:(2007,2008,2009,2010)
+        required: false
+        default:
+      sort:
+        displayName: Sorting
+        type: string
+        description: Sorting parameter accepts a comma separated list of field names that the user wants to sort the response by.
+        example: sort=xxx,-yyy,zzz
+        required: false
+        default:
+      pretty_print:
+        displayName: Pretty Print
+        type: string
+        description: Pretty print will put carriage returns and indentation in the json response so that it can be easily read by a human.
+        example: pretty_print=yes
+        required: false
+        default: no
+      format:
+        displayName: Response Format
+        type: string
+        description: Format is used to define how output method for the response (json, xml, csv).
+        example: format=json
+        required: false
+        default: json
+      limit:
+        displayName: Row Limit
+        type: number
+        description: Limit will set the number of rows that are returned in a request.
+        example: limit=100
+        required: false
+        default: 100
+      offset:
+        displayName: Row Offset
+        type: number
+        description: Offset will set the starting point of the pagination.
+        example: offset=0
+        required: false
+        default: 0
+/fiscal_service:
+  description: "Fiscal Service"
+  /v1:
+    description: "v1"
+    /debt:
+      description: "Debt"
+      /top:
+        description: "Treasury Offset Program"
+        /state_programs:
+          description: "State Programs"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /federal_collections:
+          description: "Federal Collections"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+      /tror:
+        description: "Treasury Report On Receivables"
+        /analytics_delinquent_debt:
+          description: "TROR-Analytics Delinquent Debt"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_delinquent_debt_vs_receivables:
+          description: "TROR-Analytics Delinquent Debt vs Receivables"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_receivable_accruals_additional_receivables:
+          description: "TROR-Analytics Receivable Accruals Additional Receivables"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /cnc_debt:
+          description: "TROR-Currently Not Collectible Debt"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /collections_on_delinquent_debt:
+          description: "TROR-Collections on Delinquent Debt"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /credit_bureau_reporting:
+          description: "TROR-Credit Bureau Reporting"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /referral_to_top:
+          description: "TROR-Referral to TOP"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /1099-c:
+          description: "TROR-1099-C"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /delinquent_debt:
+          description: "TROR-Delinquent Debt"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /two_years_delinquent:
+          description: "TROR-Two Years Delinquent"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_write_off:
+          description: "TROR-Analytics Write Off"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_collections_vs_receivables:
+          description: "TROR-Analytics Collections vs Receivables"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_collections_on_receivables:
+          description: "TROR-Analytics Collections on Receivables"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_collection_delinquent_debt:
+          description: "TROR-Analytics Collection Delinquent Debt"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_cnc_debt:
+          description: "TROR-Analytics Currently Not Collectible Debt"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_referral_to_treasury:
+          description: "TROR-Analytics Referral to Treasury"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /analytics_delinquent_debt_age:
+          description: "TROR-Analytics Delinquent Debt Age"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+    /tfm:
+      description: "TFM"
+      /top:
+        description: "Treasury Offset Program"
+        /state_programs:
+          description: "TFM-State Programs"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /federal_collections:
+          description: "TFM-Federal Collections"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+    /accounting:
+      description: "Accounting"
+      /od:
+        description: "Open Data"
+        /debt_outstanding:
+          description: "OD-Debt Outstanding"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /exchange_rates:
+          description: "OD-Exchange Rates"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /slgs_statistics:
+          description: "OD-SLGS Statistics"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /fip_rates_prices:
+          description: "OD-FIP Rates and Prices"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /debt_to_penny:
+          description: "OD-Debt to the Penny"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /gold_reserve:
+          description: "OD-Gold Reserve"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+    /revenue:
+      description: "Revenue"
+      /rcm:
+        description: "Revenue Collections Management"
+        is: [pageable]
+        get:
+          responses:
+            200:
+              body:
+                application/xml:
+                application/json:
+                application/csv:
+            400:
+              body:
+                application/json:
+
+    /reference:
+      description: "Reference"
+      /data_registry:
+        description: "Data Registry"
+        /value_domain:
+          description: "Data Registry-Value Domain"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /situational_metadata:
+          description: "Data Registry-Situational Metadata"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+
+        /business_rules:
+          description: "Data Registry-Business Rules"
+          is: [pageable]
+          get:
+            responses:
+              200:
+                body:
+                  application/xml:
+                  application/json:
+                  application/csv:
+              400:
+                body:
+                  application/json:
+

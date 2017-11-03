@@ -1,0 +1,431 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>API documentation - Transparency.Treasury.Gov Open Tech</title>
+    <link rel="stylesheet" href="/developer-hub/static/css/normalize.css">
+    <link rel="stylesheet" href="/developer-hub/static/css/style.css">
+    <link rel="stylesheet" href="/developer-hub/static/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async type="text/javascript"
+            src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=TREAS&subagency=BFS"
+            id="_fed_an_ua_tag"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+
+    <![endif]-->
+
+    <!--[if IE]>
+    <link rel="stylesheet" href="/developer-hub/static/css/for-ie-only.css">
+    <![endif]-->
+    
+
+</head>
+<body>
+<div id="page_top"></div>
+
+<header class="header cf" role="banner">
+    <div class="site-header wrap">
+	<img class="logo" src="/developer-hub/static/img/logo_white.svg"/>
+
+	<h1>
+		<a href=""><span>Transparency.Treasury.Gov</span></a>
+		<small>An Official Website of the U.S. Department of the Treasury</small>
+	</h1>
+</div>
+
+</header>
+
+<div class="wrap">
+    <div class="content">
+
+        <aside>
+            
+<!-- <h1 class="page-title"><a href="/developer-hub/index.html">Transparency.Treasury.Gov <br>API docs</a></h1> -->
+<p class="intro">The U.S. Department of the Treasury (Treasury) is committed to creating openness and transparency in the federal government. </p>
+<nav>
+    <ul>
+      <li><a href="/developer-hub/index.html" class="overview">Overview</a></li>
+<!--      <li><a href="/developer-hub/explore.html" class="explore">API Documentation</a></li> -->
+      <li><a href="/developer-hub/api-reference.html" class="api-reference">API Documentation RAML</a></li>
+      <li><a href="/developer-hub/api-standard.html" class="api-standard">API Standard</a></li>
+      <li><a href="/developer-hub/contribute.html" class="contribute">Community</a></li>
+    </ul>
+</nav>
+
+        </aside>
+
+        <section class="main-content" role="main">
+            <h1 id="api-standard-for-fiscal-service">API Standard for Fiscal Service</h1>
+
+<h3 id="overview">1. Overview</h3>
+
+<p>This guide documents the framework used to develop APIs for Fiscal Service.  The framework should be used by the Bureau of the Fiscal Service for all public-facing APIs.  This provides consistency to the public user and allows APIs to be consolidated into a common portal. This version (v.1) contains elements that are still under development and may be subject to change as Fiscal Service continues to evaluate use of APIs.</p>
+
+<h3 id="api-framework">2. API Framework</h3>
+
+<p>The API framework is used to define the layout of the URL, input parameters, and the response.  The framework defined within this document provides a consistent experience for the Fiscal Service API user.</p>
+
+<h3 id="url-layout-and-taxonomy">2.1 URL Layout and Taxonomy</h3>
+<p>The URLs should be formatted with all characters in lower case and separated by underscores (e.g. fiscal_service).  All endpoints will be singular case.  All requests will be HTTP GET requests.  The URL of an API is broken down into the following components:</p>
+
+<p>Organization: The organization component of the API URL reflects the bureau that is creating the API.</p>
+
+<p><code>(e.g. https://api.transparency.treasury.gov/services/api/fiscal_service)</code></p>
+
+<p>Version: Integer version number for the release of the API.  This is only changed when a revision will affect the underlying behavior of the request/response.Backward compatible changes will not result in a new version number.  APIs may incorporate a ‘default version’ that automatically uses the newest version of the API if none is specified.</p>
+
+<p><code>(e.g. https://api.transparency.treasury.gov/services/api/fiscal_service/v1)</code></p>
+
+<p>Subject Area: The subject area represents the business area within the organization for the API.  The subject areas, as defined for the API,  for the Fiscal Service are:</p>
+
+<ol>
+  <li>debt</li>
+  <li>payments</li>
+  <li>collections</li>
+  <li>accounting</li>
+  <li>securities</li>
+</ol>
+
+<p><code>(e.g. https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt)</code></p>
+
+<p>Topic/Sub Topic: After the subject area the API endpoint can end with a topic or have a number of sub topics.  The topic references the specific set of data within the hierarchy that the user is looking to query.</p>
+
+<p><code>(e.g. https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror)</code></p>
+
+<p>or </p>
+
+<p><code>https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror/analytics_collection_delinquent_debt)</code></p>
+
+<h3 id="input-parameters">2.2 Input Parameters</h3>
+
+<p>API input parameters are designed with the end user in mind.  They are structured for consistency across APIs.  The parameters are separated into the following:  fields, filter, sorting, query (future release), pretty print (future release), format, and pagination.</p>
+
+<h3 id="fields">2.2.1 Fields</h3>
+
+<ol>
+  <li>Definition:  Field parameter accepts a comma separated list of field names that the user wants to be returned in the response.</li>
+  <li>Parameter: fields=</li>
+  <li>Accepts: Valid field name</li>
+  <li>Required:  No</li>
+  <li>Default Value: Default to all fields if not provided</li>
+  <li>Example: 
+<a href="https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror/delinquent_debt?fields=funding_type_id,delinquency_rate_amount,debt_by_category_count">https://api.transparency.treasury.gov/services/api/…/delinquent_debt?fields=funding_type_id,delinquency_rate_amount,debt_by_category_count</a>.</li>
+</ol>
+
+<h3 id="filters">2.2.2 Filters</h3>
+
+<ol>
+  <li>Definition: Filter is used to apply logic criteria to each field if necessary. </li>
+  <li>Parameter: fields=</li>
+  <li>Accepts: Valid comma separated list of fields and filter criteria. 
+    <ol>
+      <li>Filter criteria is as follows:
+        <ol>
+          <li>lt = less than</li>
+          <li>gt = greater than:</li>
+          <li>lte = less than or equal to</li>
+          <li>gte = greater than or equal to</li>
+          <li>eq = equal to</li>
+          <li>in = in
+            <ol>
+              <li>Usage
+                <ol>
+                  <li>filter=reporting_fiscal_year:in:(2007,2008,2009,2010)</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Required:  No</li>
+          <li>Default Value: Default to all fields and all data if not provided</li>
+          <li>Example of Request including Filter Properties:
+<a href="https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror/delinquent_debt?filter=funding_type_id:eq:202">https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror/delinquent_debt?filter=funding_type_id:eq:202</a>.</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="sorting">2.2.3 Sorting</h3>
+
+<ol>
+  <li>Definition:  Field parameter accepts a comma separated list of field names for how the user wants to sort the response.</li>
+  <li>Parameter: sort=
+    <ol>
+      <li>– will be used to do descending sort.</li>
+      <li>Accepts: Valid fields name</li>
+      <li>Required:  No</li>
+      <li>Default Value: Default sort will be controlled by the API</li>
+      <li>Example: <a href="https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?sort=funding_type_id">https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?sort=funding_type_id</a>.</li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="pretty-print-planned-for-future-release">2.2.4 Pretty Print (Planned for Future Release)</h3>
+
+<ol>
+  <li>Definition:  Pretty print will put carriage returns in the json response so that it can be 		easily read by a human.</li>
+  <li>Parameter: pretty_print</li>
+  <li>Accepts: yes/no</li>
+  <li>Required:  No</li>
+  <li>Default Value: Default to no response is not pretty print</li>
+  <li>Example: <a href="https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?pretty_print=yes">https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?pretty_print=yes</a>.</li>
+</ol>
+
+<h3 id="format">2.2.5 Format</h3>
+
+<ol>
+  <li>Definition:  Format is used to define the output method for the response.</li>
+  <li>Parameter: format=</li>
+  <li>Accepts: xml, json, csv</li>
+  <li>Required:  No</li>
+  <li>Default Value: Default to json</li>
+  <li>Example: <a href="https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?format=json">https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?format=json</a>. </li>
+</ol>
+
+<h3 id="pagination-limitoffset">2.2.6 Pagination (limit/offset)</h3>
+
+<ol>
+  <li>Definition:  Limit will set the number of rows that are returned in a request and offset will set the starting point of the pagination.</li>
+  <li>Parameter: offset=0,limit=100</li>
+  <li>Accepts: Both accept an integer</li>
+  <li>Required:  No</li>
+  <li>Default Value: Default to offset of 0 and limit of 100</li>
+  <li>Example: <a href="https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?limit=100&amp;offset=100">https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?limit=100&amp;offset=100</a>.</li>
+</ol>
+
+<h3 id="query-planned-for-future-release">2.2.7 Query (Planned for Future Release)</h3>
+
+<ol>
+  <li>Definition:  Query parameter is a free form text search in all of the fields of the response.</li>
+  <li>Parameter: q=</li>
+  <li>Required:  No</li>
+  <li>Accepts: Text</li>
+  <li>Default Value: Default to no query, all rows will be returned.</li>
+</ol>
+
+<ul>
+  <li>Example: https://api.transparency.treasury.gov/services/api/fiscal_service/v1/debt/tror?q=tror</li>
+</ul>
+
+<h3 id="response">2.3 Response</h3>
+
+<p>The response will be formatted according to the format input parameter specified above and will be json, xml or csv.  The response will be utf-8 and will have gzip support. </p>
+
+<p>Response Example:</p>
+
+<pre>
+	{
+		"data": [{
+			"field": "value",
+			"field": "value",
+			"field": "value",
+			"field": "value",
+			"field": "value"
+		}],
+		"meta": {
+			"count": "1",
+			"labels": {
+				"field": "Field Name In Title Case",
+				"field": "Field Name In Title Case",
+				"field": "Field Name In Title Case",
+				"field": "Field Name In Title Case",
+				"field": "Field Name In Title Case"
+			}
+		}
+	}
+</pre>
+
+<h3 id="granularity">2.3.1 Granularity</h3>
+
+<p>Response will be constructed to include a single granularity that can be rolled up using a data grouping (i.e. sum, avg, max, min).</p>
+
+<h3 id="datatypes">2.3.2 Datatypes</h3>
+
+<p>All fields in a response will be treated as strings and enclosed in double quotes.</p>
+
+<h3 id="response-codes">2.3.3 Response Codes</h3>
+
+<p>The following response codes may be returned:</p>
+
+<ol>
+  <li>200 OK:  Response to a successful GET.</li>
+  <li>304 Not Modified:  Cached response.</li>
+  <li>400 Bad Request:  Request was malformed.</li>
+  <li>403 Forbidden:  API Key is not valid.</li>
+  <li>404 Not Found: When a non-existent resource is requested.</li>
+  <li>405 Method Not Allowed:  Attempting anything other than a GET.</li>
+  <li>429 Too Many Requests:  Failed due to rate limiting.</li>
+</ol>
+
+<h3 id="envelope">2.3.4 Envelope</h3>
+
+<p>The response will default to json and will include an envelope by default.	</p>
+
+<p>Example:</p>
+<pre>
+	{
+		… response data …
+	}
+</pre>
+
+<h3 id="meta-object">2.3.5 Meta Object</h3>
+
+<p>The meta object provides metadata around the result payload.  The object will contain the following:</p>
+
+<ol>
+  <li>count:  Record count for the response.</li>
+  <li>labels:  Mapping from result field to logical field names.</li>
+</ol>
+
+<h3 id="data-object">2.3.6 Data Object</h3>
+
+<p>It is the section of the response where the actual data will be returned. </p>
+
+<h3 id="error-object">2.3.7 Error Object</h3>
+
+<p>If something goes wrong during the process of creating the API response, an error object will be returned to the user.  The object will contain the following information:</p>
+
+<ol>
+  <li>title:   The error message</li>
+  <li>detail:  The error description</li>
+</ol>
+
+<p>Example response:</p>
+
+<pre>
+	{
+		"error": "Error Name",
+		"message": "Explanation – if available"
+	}
+</pre>
+
+<h3 id="pagination-header">2.3.8 Pagination Header</h3>
+
+<p>The pagination header will contain the Link: header</p>
+
+<ol>
+  <li>Definition:  The pagination header will contain a link header that, as specified in RFC 5988, 6585,  allowing user to navigate pagination just using the API</li>
+  <li>Header:
+    <ol>
+      <li>Link: <code>&lt;url first&gt;</code>; rel=”first”, <code>&lt;url prev&gt;</code>; rel=”prev”; <code>&lt;url  next&gt;</code>;rel=”next”;<code>&lt;url last&gt;</code>;rel=”last”</li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="api-documentation-raml">2.4 API Documentation (RAML)</h3>
+
+<p>Summary listing of all available API endpoints: </p>
+
+<ul>
+  <li>services/api/docs/api.raml</li>
+</ul>
+
+<p>Detail endpoint documentation with json schema (works for any endpoint with .raml): </p>
+
+<ul>
+  <li>services/api/fiscal_service/v1/debt/top/state_programs.raml</li>
+</ul>
+
+<p>Treasury Securities:</p>
+
+<ul>
+  <li><a href="http://www.treasurydirect.gov/webapis/webapisecurities.htm">http://www.treasurydirect.gov/webapis/webapisecurities.htm</a>.</li>
+</ul>
+
+<p>Debt Information:</p>
+
+<ul>
+  <li><a href="http://www.treasurydirect.gov/webapis/webapisdebt.htm">http://www.treasurydirect.gov/webapis/webapisdebt.htm</a>.	</li>
+</ul>
+
+<h1 id="appendices---glossary">Appendices - Glossary</h1>
+
+<p>Included is a list of acronyms, design patterns and developer tools commonly referred to in this document.</p>
+
+<p><strong>API:</strong> Application Program Interface. Programming Interfaces that enable software to interact with other software through exposed functionality.</p>
+
+<p><strong>API Key:</strong> An authorization code passed into an API request using a parameter to identify the requester. </p>
+
+<p><strong>Authentication:</strong> Identifying the user of the API. </p>
+
+<p><strong>Cache:</strong> A collection of responses that are reused by the client to improve performance.</p>
+
+<p><strong>CSV:</strong> comma-separated values. A file type that stores tabular data (numbers and text) in plain text. Each line of the file is a data record. Each record consists of one or more fields, separated by commas. </p>
+
+<p><strong>GET:</strong> The HTTP method for getting resources from a RESTful API</p>
+
+<p><strong>GZIP:</strong>  GNU Zip. A file format and a software application used for file compression and decompression.</p>
+
+<p><strong>HTTP:</strong> Hypertext Transfer Protocol is how websites and APIs communicate over the internet.</p>
+
+<p><strong>JSON:</strong>  Javascript Object Notation is a data format commonly used for APIs requests  parameters and responses.</p>
+
+<p><strong>Meta:</strong> An underlying definition or description.</p>
+
+<p><strong>Metadata:</strong> Summarizes basic information about data, which can make finding and working with particular instances of data easier. </p>
+
+<p><strong>Parameter:</strong>  An argument sent to the API which helps define the request and expected response. </p>
+
+<p><strong>Python:</strong> A high-level general-purpose programming language.</p>
+
+<p><strong>RAML:</strong> RESTful API Modeling Language. Used to describe RESTful APIs</p>
+
+<p><strong>REST:</strong>  Representational state transfer is an architectural pattern for interacting with resources via HTTP methods.</p>
+
+<p><strong>URL:</strong> Uniform Resource Locator. Used to reference an address to a resource on the Internet. </p>
+
+<p><strong>Web service:</strong> Web Service is used to describe an API that is accessible over the internet through HTTP.</p>
+
+<p><strong>XML:</strong>  Extensible markup language is a format that is used to describe documents and data.</p>
+
+<p><strong>YAML:</strong>  Human-readable data serialization format designed for human readability and interaction with scripting language such as Perl and Python. </p>
+
+        </section>
+
+    </div>
+</div> <!--wrap-->
+
+<footer class="footer cf" role="contentinfo">
+    <div class="wrap">
+        
+            <!-- <section class="footer-oss">
+                <h4>Open source</h4>
+                <p>
+                    As a work of the United States Government, source code released by the Transparency.Treasury.Gov is in the public
+                    domain by default within the United States.
+                    <a href="">
+                        View our full source code policy.
+                    </a>
+                </p>
+            </section> -->
+
+
+            <section class="footer-links">
+                <ul>
+                    <li>
+                        <a href="https://transparency.treasury.gov/">transparency.treasury.gov</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/transparency-treasury/developer-hub">github.com/</a>
+                    </li>
+                    <li>
+                        <a href="https://transparency.treasury.gov/contact" target="_blank">Contact us</a>
+                    </li>
+                    <li>
+                        <a href="https://transparency.treasury.gov/article/privacy-policy" target="_blank">Private Policy Disclaimer</a>
+                    </li>
+                </ul>
+            </section>
+
+    </div>
+</footer>
+
+<script src="/developer-hub/static/js/docs.min.js"></script>
+<script type="text/javascript" src="/developer-hub/static/js/expandables.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>API documentation - Transparency.Treasury.Gov Open Tech</title>
+    <link rel="stylesheet" href="/developer-hub/static/css/normalize.css">
+    <link rel="stylesheet" href="/developer-hub/static/css/style.css">
+    <link rel="stylesheet" href="/developer-hub/static/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async type="text/javascript"
+            src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=TREAS&subagency=BFS"
+            id="_fed_an_ua_tag"></script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+
+    <![endif]-->
+
+    <!--[if IE]>
+    <link rel="stylesheet" href="/developer-hub/static/css/for-ie-only.css">
+    <![endif]-->
+    
+
+</head>
+<body>
+<div id="page_top"></div>
+
+<header class="header cf" role="banner">
+    <div class="site-header wrap">
+	<img class="logo" src="/developer-hub/static/img/logo_white.svg"/>
+
+	<h1>
+		<a href=""><span>Transparency.Treasury.Gov</span></a>
+		<small>An Official Website of the U.S. Department of the Treasury</small>
+	</h1>
+</div>
+
+</header>
+
+<div class="wrap">
+    <div class="content">
+
+        <aside>
+            
+<!-- <h1 class="page-title"><a href="/developer-hub/index.html">Transparency.Treasury.Gov <br>API docs</a></h1> -->
+<p class="intro">The U.S. Department of the Treasury (Treasury) is committed to creating openness and transparency in the federal government. </p>
+<nav>
+    <ul>
+      <li><a href="/developer-hub/index.html" class="overview">Overview</a></li>
+<!--      <li><a href="/developer-hub/explore.html" class="explore">API Documentation</a></li> -->
+      <li><a href="/developer-hub/api-reference.html" class="api-reference">API Documentation RAML</a></li>
+      <li><a href="/developer-hub/api-standard.html" class="api-standard">API Standard</a></li>
+      <li><a href="/developer-hub/contribute.html" class="contribute">Community</a></li>
+    </ul>
+</nav>
+
+        </aside>
+
+        <section class="main-content" role="main">
+            <h3 id="api-basics">API basics</h3>
+
+<p>HMDA is a GET API that lives at <code>https://api.consumerfinance.gov/data/hmda</code>.</p>
+
+<ul>
+  <li>You can query an entire <strong>dataset</strong>.</li>
+  <li>You can query dataset <strong>slices</strong>, which are pre-loaded views we think are interesting.</li>
+  <li>You can query <strong>concepts</strong>, which describe types of information found in the dataset.</li>
+</ul>
+
+<h5 id="datasets">Datasets</h5>
+<p>The endpoint for querying all data begins with <code>/data/</code>. </p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Endpoint</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>/data/{dataset-name}</code></td>
+      <td>Gives all information about a dataset</td>
+    </tr>
+    <tr>
+      <td><a href="https://api.consumerfinance.gov/data/hmda"><code>/data/hmda</code></a></td>
+      <td>Gives mortgage data from 2007-2012.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="console/#!/data/getDataset_get_1" class="action-arrow">Try it out <i class="icon-right"> </i></a></p>
+
+<h5 id="concepts">Concepts</h5>
+<p>Concepts are analogous to variables, or column headers in a spreadsheet. Concepts have properties, which describe all the possible values. You can also specify concepts in any of the supported file formats like so: <code>/data/{dataset-name}/{contept-name.extension}</code>. </p>
+
+<p><a href="console/#!/hmda/getConceptHmda_get_1" class="action-arrow">Try it out <i class="icon-right"> </i></a></p>
+
+<h5 id="slices">Slices</h5>
+<p>Think of slices as tables in a relational database. Every dataset has many slices representing different views of it, which you can use to <a href="queries.html">construct advanced queries</a>. The endpoint for
+every slice is <code>/data/{dataset-name}/{slice-name}</code>. </p>
+
+<p>You can even request a slice in HTML, XML, JSON, JSONP, or CSV. Just append the filename extension to the endpoint like so:
+<code>/data/{dataset-name}/{slice-name.extension}</code>. </p>
+
+<p><a href="console/#!/hmda/querySliceHmda_get_2" class="action-arrow"> Try it out <i class="icon-right"> </i></a></p>
+
+<h5 id="putting-it-all-together">Putting it all together</h5>
+<p>Every year, the Federal Reserve finds interesting trends in HMDA data and publishes them in a report. Let’s say you want to replicate some of their <a href="http://www.consumerfinance.gov/hmda/learn-more#highlights">2012 highlights</a> in JSON. </p>
+
+<p>To compare refinances and home purchases in 2012, you would send the following query to the API:</p>
+<pre>https://api.consumerfinance.gov/data/hmda/slice/hmda_lar.json?#!/property_type=1,2&amp;action_taken=1&amp;select=as_of_year,loan_purpose_name,count&amp;section=summary</pre>
+<p><a href="https://api.consumerfinance.gov/data/hmda/slice/hmda_lar.json?#!/property_type=1,2&amp;action_taken=1&amp;select=as_of_year,loan_purpose_name,count&amp;section=summary" class="action-arrow"> Try it out <i class="icon-right"> </i></a></p>
+
+<p>To see changes in the FHA loan market for 2012, you would send the following query to the API:</p>
+<pre>https://api.consumerfinance.gov/data/hmda/slice/hmda_lar.json?#!/lien_status=1&amp;loan_purpose=1&amp;action_taken=1&amp;select=as_of_year,loan_type_name,count&amp;section=summary</pre>
+<p><a href="https://api.consumerfinance.gov/data/hmda/slice/hmda_lar.json?#!/lien_status=1&amp;loan_purpose=1&amp;action_taken=1&amp;select=as_of_year,loan_type_name,count&amp;section=summary" class="action-arrow"> Try it out <i class="icon-right"> </i></a></p>
+
+<body id="basics"></body>
+
+        </section>
+
+    </div>
+</div> <!--wrap-->
+
+<footer class="footer cf" role="contentinfo">
+    <div class="wrap">
+        
+            <!-- <section class="footer-oss">
+                <h4>Open source</h4>
+                <p>
+                    As a work of the United States Government, source code released by the Transparency.Treasury.Gov is in the public
+                    domain by default within the United States.
+                    <a href="">
+                        View our full source code policy.
+                    </a>
+                </p>
+            </section> -->
+
+
+            <section class="footer-links">
+                <ul>
+                    <li>
+                        <a href="https://transparency.treasury.gov/">transparency.treasury.gov</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/transparency-treasury/developer-hub">github.com/</a>
+                    </li>
+                    <li>
+                        <a href="https://transparency.treasury.gov/contact" target="_blank">Contact us</a>
+                    </li>
+                    <li>
+                        <a href="https://transparency.treasury.gov/article/privacy-policy" target="_blank">Private Policy Disclaimer</a>
+                    </li>
+                </ul>
+            </section>
+
+    </div>
+</footer>
+
+<script src="/developer-hub/static/js/docs.min.js"></script>
+<script type="text/javascript" src="/developer-hub/static/js/expandables.js"></script>
+
+
+
+</body>
+</html>

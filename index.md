@@ -3,46 +3,26 @@ published: true
 layout: default
 
 ---
+#### Overview
 
-### Overview
+The U.S. Department of the Treasury (Treasury) is committed to promoting openness and transparency in the federal government. This openness fosters accountability, allows for citizen participation, increases trust and confidence in the federal government, and ensures effective and efficient operations.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet tempor enim, vitae volutpat eros. Integer non tincidunt arcu. Vestibulum at rutrum metus. This data is important because:
+To meet these objectives, the Treasury’s Bureau of the Fiscal Service (Fiscal Service) has developed a portal to make certain financial data it collects accessible to the public through transparency.treasury.gov.
 
-- Donec neque lorem, vestibulum in tortor sed;
-- Elementum consequat ipsum. Mauris quam purus, feugiat vitae tortor in; and
-- Aliquet venenatis nulla. Nam massa diam, rutrum rutrum cursus eu.
+The Application Program Interface (API)s made available on transparency.treasury.gov, originate from financial data provided by the Fiscal Service, and can make everything easier, from advanced analytics to simple reports hosted in separate programs or on separate websites.
 
-Donec quis eros accumsan, aliquet justo ut, convallis eros. Etiam justo enim, blandit eget rhoncus id, tincidunt id ipsum. Pellentesque vehicula feugiat turpis, ac sodales velit ultrices eget. Nam posuere quam nec odio tincidunt, et egestas nulla scelerisque. 
-
-##### Get started
-We built the API to be as self-documenting as possible, but if you find yourself overwhelmed, we organized this site into four major areas.
-
-- [API basics](basics.html) introduces you to the operations offered by the API.
-- [API calls](console/) gives you a hands-on experience of those operations with an interactive console.
-- [Query language](queries.html) contains a comprehensive listing of all the API's types, functions, and enumerations.
-- [Field reference](fields.html) lists and describes the type of information reported in the LAR.
-
-<!--
-[HMDA](http://www.consumerfinance.gov/hmda) is the CFPB's first dataset to publish using [Qu](http://cfpb.github.io/qu/), an in-progress data platform created to serve public data.
-
-Qu is the first CFPB project built from the beginning on [GitHub](https://github.com/cfpb/), too. If you think you can make the API better–or just want to take a look under the hood–check it out, and learn about how you can host your own datasets or contribute to the project. 
+Learn more: <a target="_blank" href="https://www.transparency.treasury.gov/article/API">transparency.treasury.gov/article/API</a>
 
 
-<ul class="repo-list">
-  <li class="list-icon">
-    <p class="image-wrap">
-      <img src="http://usg-website-templates.github.io/developer-hub/static/img/octocat.png" width="25px" title="Github">
-    </p>
-  </li>
-  <li>
-    <a href="https://github.com/cfpb/qu">
-     <h4>Qu</h4>
-      <p>The open source software that runs the platform</p>
-    </a>
-  </li>
-</ul>
--->
+###  Get started
+
+We welcome you to explore the available APIs on transparency.treasury.gov. These APIs allow you to analyze financial data trends and patterns and gain insights about federal government debt management, collections, accounting and payment data.
+
+Over time we will expand the APIs available through transparency.treasury.gov to provide better access to integrated financial management information. Your participation is critical to the success of this effort, and we value your feedback.  We welcome you to share your applications and provide input at any time.
+
+If you have any questions or concerns, or encounter technical issues, please [contact](https://transparency.treasury.gov/contact) a member of the support team.  
+
+Your use and access to the APIs are governed by the applicable [Terms of Service](https://transparency.treasury.gov/article/terms-of-service) Agreement.
+
+
 <body id="overview"></body>
-
-
-Not interested in programming? You can still get the data! Visit the [explore the data](URL_of_data).

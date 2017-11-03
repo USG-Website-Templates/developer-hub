@@ -1,0 +1,179 @@
+#%RAML 0.8
+---
+title: TFM-State Programs
+version: v1
+baseUri: https://transparency.treasury.gov:443/services/api
+protocols: [ HTTP ]
+
+/fiscal_service/v1/tfm/top/state_programs:
+  description: TFM-State Programs
+  get:
+    queryParameters:
+      fields:
+        displayName: Field List
+        type: string
+        description: Field parameter accepts a comma separated list of field names that the user wants to be returned in the response.
+        example: fields=xxx,yyy,zzz
+        required: false
+        default: 
+      filter:
+        displayName: Filter
+        type: string
+        description: Filter is used to apply logic criteria to each field if necessary (lt, gt, lte, gte, eq, in).
+        example: 1) filter=xxx:eq:value,yyy:lt:1,zzz:gt:10  2) filter=reporting_fiscal_year:in:(2007,2008,2009,2010)
+        required: false
+        default: 
+      sort:
+        displayName: Sorting
+        type: string
+        description: Sorting parameter accepts a comma separated list of field names that the user wants to sort the response by.
+        example: sort=xxx,-yyy,zzz
+        required: false
+        default: 
+      pretty_print:
+        displayName: Pretty Print
+        type: string
+        description: Pretty print will put carriage returns and indentation in the json response so that it can be easily read by a human.
+        example: pretty_print=yes
+        required: false
+        default: no
+      format:
+        displayName: Response Format
+        type: string
+        description: Format is used to define how output method for the response (json, xml, csv).
+        example: format=json
+        required: false
+        default: json
+      limit:
+        displayName: Row Limit
+        type: number
+        description: Limit will set the number of rows that are returned in a request.
+        example: limit=100
+        required: false
+        default: 100
+      offset:
+        displayName: Row Offset
+        type: number
+        description: Offset will set the starting point of the pagination.
+        example: offset=0
+        required: false
+        default: 0
+    responses:
+      200:
+        body:
+          application/xml:
+          application/csv:
+          application/json:
+            schema: |
+              {
+                "type": "object",
+                "$schema": "http://json-schema.org/draft-03/schema",
+                "id": "http://jsonschema.net",
+                "properties": {
+                  "bus_glossary_id": {
+                    "type": "number",
+                    "description": "Treasury Offset Program",
+                    "format": "10.2"
+                  },
+                  "business_line_cd": {
+                    "type": "string",
+                    "description": "Business Line",
+                    "format": ""
+                  },
+                  "context_name": {
+                    "type": "string",
+                    "description": "Context Name",
+                    "format": ""
+                  },
+                  "bus_glossary_term": {
+                    "type": "string",
+                    "description": "Business Glossary Term Category",
+                    "format": ""
+                  },
+                  "bus_glossary_admin_status_cd": {
+                    "type": "string",
+                    "description": "Business Glossary Administrative Status",
+                    "format": ""
+                  },
+                  "bus_glossary_abbrev": {
+                    "type": "string",
+                    "description": "Business Glossary Business Term Abbreviation",
+                    "format": ""
+                  },
+                  "bus_glossary_definition": {
+                    "type": "string",
+                    "description": "Business Glossary Definition",
+                    "format": ""
+                  },
+                  "bus_glossary_desc": {
+                    "type": "string",
+                    "description": "Business Glossary Description",
+                    "format": ""
+                  },
+                  "bus_glossary_see_also_txt": {
+                    "type": "string",
+                    "description": "Business Glossary See Also",
+                    "format": ""
+                  },
+                  "bus_glossary_background_txt": {
+                    "type": "string",
+                    "description": "Business Glossary Background",
+                    "format": ""
+                  },
+                  "bus_glossary_term_dt": {
+                    "type": "date",
+                    "description": "Business Glossary Term Date",
+                    "format": "YYYY-MM-DD"
+                  },
+                  "bus_glossary_source_txt": {
+                    "type": "string",
+                    "description": "Business Glossary Source",
+                    "format": ""
+                  },
+                  "bus_glossary_bureau_nm": {
+                    "type": "string",
+                    "description": "Business Glossary Bureau",
+                    "format": ""
+                  },
+                  "bus_glossary_src_doc_section": {
+                    "type": "string",
+                    "description": "Business Glossary Source Document Section",
+                    "format": ""
+                  },
+                  "bus_glossary_src_doc_page": {
+                    "type": "string",
+                    "description": "Business Glossary Source Document Page Number",
+                    "format": ""
+                  },
+                  "bus_glossary_term_category": {
+                    "type": "string",
+                    "description": "Business Glossary Term Category",
+                    "format": ""
+                  },
+                  "bus_glossary_html_src_ref_url": {
+                    "type": "string",
+                    "description": "Business Glossary HTML Source Reference URL",
+                    "format": ""
+                  },
+                  "api_id": {
+                    "type": "number",
+                    "description": "API ID",
+                    "format": "10.2"
+                  },
+                  "report_pretty_nm": {
+                    "type": "string",
+                    "description": "Report Pretty Name",
+                    "format": ""
+                  },
+                  "attribute_id": {
+                    "type": "number",
+                    "description": "Attribute ID",
+                    "format": "10.2"
+                  },
+                }
+              }
+      400:
+        body:
+          application/json:
+            example: |
+              {"error":"Invalid Query Param","message":"Invalid query parameter 'foo' with value '[error]'.  For more information please see the documentation."}
